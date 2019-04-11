@@ -110,7 +110,6 @@ int main(){
     {' ','a','b','c','d','e','f','g','h'}
   };
   ChessField(pole);
-  int i1,i2,j1,j2;
   	
   while(true)
   {
