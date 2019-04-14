@@ -1,7 +1,7 @@
-
+g = g++
 pars = -c -Wall -Werror
-file1 = src/main
-file2 = src/board
+file1 = src/main.cpp
+file2 = src/board.cpp
 files = $(file1) $(file2)
 binary = bin/main
 object1 = build/main.o
@@ -14,19 +14,18 @@ NewDir:
 	mkdir bin build -p
 
 $(object1): $(file1)
-	g++ -c -Wall -Werror $^ -o $@
+	$(g) $(pars) $^ -o $@
  
 $(object2): $(file2)
-	g++ $(pars) $^ -o $@
+	$(g) $(pars) $^ -o $@
 
 $(binary): $(objects)
-	g++ $^ -o $(binary)
+	$(g) $^ -o $(binary)
 
 test: all
 	./bin/main
 
 no-rm: $(binary)
-
 
 clean:
 	rm build/*.o
