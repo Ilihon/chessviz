@@ -8,7 +8,7 @@ object1 = build/main.o
 object2 = build/board.o
 objects = $(object1) $(object2)
 
-all: NewDir $(binary) clean
+all: $(binary) clean
 
 NewDir:
 	mkdir bin build -p
