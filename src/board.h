@@ -12,4 +12,4 @@ using namespace std;
 void ChessField(char pole[][9]);
 void Move(char pole[][9]);
 
-#endif 
+#endif
