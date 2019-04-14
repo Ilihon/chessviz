@@ -1,8 +1,4 @@
-#include <stdlib.h>
-#include <iostream>
-#include <string.h>
-#include <stdio.h>
-#include <iomanip>
+#include "board.h"
 
 using namespace std;
 
