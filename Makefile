@@ -10,9 +10,6 @@ objects = $(object1) $(object2)
 
 all: $(binary) clean
 
-NewDir:
-	mkdir bin build -p
-
 $(object1): $(file1)
 	$(g) $(pars) $^ -o $@
  
