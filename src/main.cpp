@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include <string.h>
-#include "board.hpp"
+#include "board.h"
 
 using namespace std;
 
