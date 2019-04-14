@@ -19,7 +19,7 @@ void Move(char pole[][9])
     cout << endl << "Input your move: ";
     getline(cin, step);
     if (step == "exit") {
-+       cout << "Exit the programm";
+        cout << "Exit the programm";
         exit(0);
     }
     if (step.length() != 5) {
