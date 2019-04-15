@@ -8,6 +8,8 @@ object1 = build/main.o
 object2 = build/board.o
 objects = $(object1) $(object2)
 
+.PHONY: clean test
+
 all: $(binary) clean
 
 $(object1): $(file1)
