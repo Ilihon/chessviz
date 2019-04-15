@@ -1,2 +1,2 @@
 # chessviz
-https://travis-ci.org/Ilihon/chessviz
+# https://travis-ci.org/Ilihon/chessviz
