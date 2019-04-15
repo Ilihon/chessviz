@@ -10,7 +10,7 @@ objects = $(object1) $(object2)
 
 .PHONY: clean test
 
-all: $(binary) clean
+all: $(binary) 
 
 $(object1): $(file1)
 	$(g) $(pars) $^ -o $@
@@ -21,7 +21,7 @@ $(object2): $(file2)
 $(binary): $(objects)
 	$(g) $^ -o $(binary)
 
-test: all
+test: 
 	./bin/main
 
 no-rm: $(binary)
