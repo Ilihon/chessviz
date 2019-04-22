@@ -10,7 +10,7 @@ objects = $(object1) $(object2)
 
 .PHONY: clean test
 
-all: $(binary) 
+all: $(binary)
 
 $(object1): $(file1)
 	$(g) $(pars) $^ -o $@
