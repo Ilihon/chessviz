@@ -149,9 +149,262 @@ void Move(char pole[][9])
     cout << i1;
     cout << j2;
     cout << i2;
+	int d = MoveCheck(i1,i2,j1,j2,pole);
+	if(d==1){
+	pole[i2][j2]=pole[i1][j1];
+	pole[i1][j1]=' ';
+	}
+	cout << endl;
+	cout << endl;
 
-    pole[i2][j2] = pole[i1][j1];
-    pole[i1][j1] = ' ';
-    cout << endl;
-    cout << endl;
+}
+
+
+int MoveCheck(int i1, int i2, int j1, int j2, char pole[][9]){
+	int d=0;
+	if((i1==i2)&&(j1==j2)){
+		cout << "\n ERROR: You didn't move the figure' \n \n"; return 0;
+	}
+	switch(pole[i1][j1]){
+		case ' ' : cout << "\n ERROR: You don't have the figure on first position' \n \n"; return 0;
+		
+		case 'P' : 
+			if(FriendlyFire(1,i2,j2,pole)==1){
+				if((j1==j2) && (i1-i2==1))
+					d=1;
+				if((j1==j2) && (i1-i2==2) && (i1==6)){
+					if (pole[i2+1][j2]==' '){
+					d=1;	
+					}
+					else{
+						cout << "\n ERROR: Pawn can't reach the position through the figure \n \n"; 
+						return 0;
+					}
+				}
+				if((i1-i2==1) && (pole[i2][j2]!=' ') && ((j1-j2==1) || (j2-j1==1)))
+					d=1;
+			}	
+		break;
+		
+		case 'R' :
+		if(FriendlyFire(1,i2,j2,pole)==1){	
+			if((j1==j2) && (i1!=i2)){
+				if(i1>i2){
+					for(int i=i1-1;i>i2;i--)
+					{
+						if(pole[i][j1] != ' '){
+						cout << "\n ERROR: Rook can't reach the position through the figure' \n \n"; 
+						return 0;		
+						}
+					}
+					d=1;
+				}
+				if(i1<i2){
+					for(int i=i2-1;i>i1;i--)
+					{
+						if(pole[i][j1] != ' '){
+						cout << "\n ERROR: Rook can't reach the position through the figure' \n \n"; 
+						return 0;		
+						}
+					}
+					d=1;
+				}
+			}
+			if((i1==i2) && (j1!=j2)){
+				if(j1>j2){
+					for(int i=j1-1;i>j2;i--){
+						if(pole[i1][i] != ' '){
+						cout << "\n ERROR: Rook can't reach the position through the figure' \n \n"; 
+						return 0;	
+						}
+					}
+					d=1;
+				}
+				if(j1<j2){
+					for(int i=j2-1;i>j1;i--){
+						if(pole[i1][i] != ' '){
+						cout << "\n ERROR: Rook can't reach the position through the figure' \n \n"; 
+						return 0;	
+						}
+					}
+					d=1;
+				}
+			}
+		}
+		break;	
+		
+		case 'N' :
+			if(FriendlyFire(1,i2,j2,pole)==1){
+				if(((i2==i1-2) && (j2==j1+1)) || ((i2==i1-2) && (j2==j1-1)) || ((i2==i1+2) && (j2==j1+1)) || ((i2==i1+2) && (j2==j1-1)) || ((i2==i1-1) && (j2==j1+2)) || ((i2==i1-1) && (j2==j1-2)) || ((i2==i1+1) && (j2==j1+2)) || ((i2==i1+1) && (j2==j1-2))){
+					d=1;
+				}
+			}
+		break;	
+		
+		case 'B' :
+			if(FriendlyFire(1,i2,j2,pole)==1){
+				if((j2<j1) && (i2<i1)){
+					if(j1-j2==i1-i2){
+						for(int i=j1-1, v=i1-1; i>j2 && v>i2; i--, v--){
+							if(pole[v][i] != ' '){
+							cout << "\n ERROR: Bishop can't reach the position through the figure' \n \n"; 
+							return 0;		
+							}
+						}
+						d=1;
+					}
+				} 
+				if((j2<j1) && (i2>i1)){
+					if(j1-j2==i2-i1){
+						for(int i=j1-1, v=i1+1; i>j2 && v<i2; i--, v++){
+							if(pole[v][i] != ' '){
+							cout << "\n ERROR: Bishop can't reach the position through the figure' \n \n"; 
+							return 0;		
+							}
+						}
+						d=1;
+					}
+				}
+				if((j2>j1) && (i2<i1)){
+					if(j2-j1==i1-i2){
+						for(int i=j1+1, v=i1-1; i<j2 && v>i2; i++, v--){
+							if(pole[v][i] != ' '){
+							cout << "\n ERROR: Bishop can't reach the position through the figure' \n \n"; 
+							return 0;		
+							}
+						}
+						d=1;
+					}
+				}
+				if((j2>j1) && (i2>i1)){
+					if(j2-j1==i2-i1){
+						for(int i=j1+1, v=i1+1; i<j2 && v<i2; i++, v++){
+							if(pole[v][i] != ' '){
+							cout << "\n ERROR: Bishop can't reach the position through the figure' \n \n"; 
+							return 0;		
+							}
+						}
+						d=1;
+					}
+				}    
+			}
+		break;
+		
+		case 'Q' :
+			if(FriendlyFire(1,i2,j2,pole)==1){
+			/// Ладья//////////////////////////////////
+			if((j1==j2) && (i1!=i2)){
+			if(i1>i2){
+				for(int i=i1-1;i>i2;i--)
+				{
+					if(pole[i][j1] != ' '){
+					cout << "\n ERROR: Queen can't reach the position through the figure' \n \n"; 
+					return 0;		
+					}
+				}
+				d=1;
+			}
+			if(i1<i2){
+				for(int i=i2-1;i>i1;i--)
+				{
+					if(pole[i][j1] != ' '){
+					cout << "\n ERROR: Queen can't reach the position through the figure' \n \n"; 
+					return 0;		
+					}
+				}
+				d=1;
+			}
+			}
+			if((i1==i2) && (j1!=j2)){
+				if(j1>j2){
+					for(int i=j1-1;i>j2;i--){
+						if(pole[i1][i] != ' '){
+						cout << "\n ERROR: Queen can't reach the position through the figure' \n \n"; 
+						return 0;	
+						}
+					}
+					d=1;
+				}
+				if(j1<j2){
+					for(int i=j2-1;i>j1;i--){
+						if(pole[i1][i] != ' '){
+						cout << "\n ERROR: Queen can't reach the position through the figure' \n \n"; 
+						return 0;	
+						}
+					}
+					d=1;
+				}
+			}
+			///Слон////////////////////////////////////////////// 
+			if((j2<j1) && (i2<i1)){
+					if(j1-j2==i1-i2){
+						for(int i=j1-1, v=i1-1; i>j2 && v>i2; i--, v--){
+							if(pole[v][i] != ' '){
+							cout << "\n ERROR: Queen can't reach the position through the figure' \n \n"; 
+							return 0;		
+							}
+						}
+						d=1;
+					}
+				} 
+			if((j2<j1) && (i2>i1)){
+				if(j1-j2==i2-i1){
+					for(int i=j1-1, v=i1+1; i>j2 && v<i2; i--, v++){
+						if(pole[v][i] != ' '){
+						cout << "\n ERROR: Queen can't reach the position through the figure' \n \n"; 
+						return 0;		
+						}
+					}
+					d=1;
+				}
+			}
+			if((j2>j1) && (i2<i1)){
+				if(j2-j1==i1-i2){
+					for(int i=j1+1, v=i1-1; i<j2 && v>i2; i++, v--){
+						if(pole[v][i] != ' '){
+						cout << "\n ERROR: Queen can't reach the position through the figure' \n \n"; 
+						return 0;		
+						}
+					}
+					d=1;
+				}
+			}
+			if((j2>j1) && (i2>i1)){
+				if(j2-j1==i2-i1){
+					for(int i=j1+1, v=i1+1; i<j2 && v<i2; i++, v++){
+						if(pole[v][i] != ' '){
+						cout << "\n ERROR: Queen can't reach the position through the figure' \n \n"; 
+						return 0;		
+						}
+					}
+					d=1;
+				}
+			}    
+			}
+		break;	
+		
+		
+	}
+	return d;
+}
+
+int FriendlyFire(int side, int i2, int j2, char pole[][9]){
+	int d =1;
+	switch(side){
+		case 1 : 
+			if ((pole[i2][j2]=='P') || (pole[i2][j2]=='R') || (pole[i2][j2]=='N') || (pole[i2][j2]=='B') || (pole[i2][j2]=='Q') || (pole[i2][j2]=='K'))
+			{	
+				cout << "\n ERROR: You can't move your figure on your figures \n \n"; 
+				d=0;
+			}
+		break;
+		case 2 : 
+			if ((pole[i2][j2]=='p') || (pole[i2][j2]=='r') || (pole[i2][j2]=='n') || (pole[i2][j2]=='b') || (pole[i2][j2]=='q') || (pole[i2][j2]=='k'))
+			{
+				cout << "\n ERROR: You can't move your figure on your figures \n \n"; 
+				d=0;
+			}
+		break;
+	}
+	return d;
 }
