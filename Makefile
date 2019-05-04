@@ -22,7 +22,7 @@ $(binary): $(objects)
 	$(g) $^ -o $(binary)
 
 test: 
-	./bin/main
+	./bin/chessviz
 
 no-rm: $(binary)
 
