@@ -239,7 +239,6 @@ void Move(char pole[][9], int *team) {
 		pole[i1][j1]=' ';
 		
 		int ib,vb;
-		char check=' ';
 		switch(*team){
 			case 0:
 				for(int i=0; i<8; i++){
