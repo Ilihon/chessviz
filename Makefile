@@ -4,8 +4,8 @@ file1 = src/main.cpp
 file2 = src/board.cpp
 files = $(file1) $(file2)
 binary = bin/chessviz
-object1 = build/main.o
-object2 = build/board.o
+object1 = build/src/main.o
+object2 = build/src/board.o
 objects = $(object1) $(object2)
 
 .PHONY: clean test
