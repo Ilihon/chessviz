@@ -1,4 +1,4 @@
-g = gcc
+g = g++
 pars = -c -Wall -Werror
 
 file1 = src/main.cpp
