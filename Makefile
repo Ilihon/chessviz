@@ -20,7 +20,7 @@ binary = bin/chessviz
 
 .PHONY: clean test all
 
-all: $(binary) clean
+all: $(binary)
 
 $(object1): $(file1)
 	$(g) $(pars) $^ -o $@
