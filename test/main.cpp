@@ -97,7 +97,7 @@ CTEST (B_Rook1, Correct_r1)
 }
 CTEST (B_Rook2, Correct_r2)
 {
-    int i1=0,j1=8;i2=2,j2=8;
+    int i1=0,j1=8,i2=2,j2=8;
     pole[1][8]=' ';
     int result=MoveCheck(1, i1, i2, j1, j2, pole);
     int expected=1;
