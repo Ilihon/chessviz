@@ -187,7 +187,7 @@ CTEST (W_Queen, Correct_Q)
 CTEST (B_Queen, Correct_q)
 {
     pole[1][4]=' ';
-    int i1=0,j1=4,i2=2;j2=4;
+    int i1=0,j1=4,i2=2,j2=4;
     int result=MoveCheck(0, i1, i2, j1, j2, pole);
     int expected=1;
     pole[1][4]='p';
