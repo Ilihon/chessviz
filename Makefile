@@ -1,5 +1,5 @@
 g = g++
-pars = -c -Wall -Werror
+pars = -c -Wall 
 
 file1 = src/main.cpp
 file2 = src/board.cpp
@@ -35,10 +35,10 @@ $(binary): $(objects)
 
 
 $(object1_test): $(file1_test) $(thirdparty) src/board.h
-	$(g) $(pars) -I thirdparty -I src -c test/main.cpp -o $@
+	$(g) $(pars) -std=c++11 -I thirdparty -I src -c test/main.cpp -o $@
 
 $(object2_test): $(file2) src/board.h
-	$(g) $(pars) $(file2) -o $@
+	$(g) $(pars) -std=c++11 $(file2) -o $@
 
 $(cbinary): $(objects_test)
 	$(g) $^ -o $(cbinary)
