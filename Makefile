@@ -1,5 +1,5 @@
 g = g++
-pars = -std=c++11 -Wall -Werror
+pars = -c -std=c++11 -Wall -Werror
 
 file1 = src/main.cpp
 file2 = src/board.cpp
@@ -18,7 +18,7 @@ cbinary = bin/chessviz-test
 binary = bin/chessviz
 
 
-.PHONY: clean test
+.PHONY: clean test all
 
 all: $(binary) clean
 
@@ -32,17 +32,17 @@ $(binary): $(objects)
 	$(g) $^ -o $(binary)
 
 
-$(object1_test): src/board.cpp
-	$(g) -I thirdparty -I src $(pars) -MMD -c $^ -o $@
+$(object1_test): src/board.cpp src/board.h
+	$(g) $(pars) src/board.cpp -o $@
 
-$(object2_test): test/main.cpp
-	$(g) -I thirdparty -I src $(pars) -MMD -c $^ -o $@
+$(object2_test): test/main.cpp thirdparty/ctest.h
+	$(g) $(pars) -I thirdparty -I src  -c test/main.cpp -o $@
 
-$(object2_test): test/test.cpp
-	$(g) -I thirdparty -I src $(pars) -MMD -c $^ -o $@
+$(object2_test): test/test.cpp thirdparty/ctest.h src/board.h
+	$(g) $(pars) -I thirdparty -I src -c test/test.cpp -o $@
 
 $(cbinary): $(objects_test)
-	$(g) $^ -o $(cbinary)
+	$(g) $(pars) $(objects_test) -o $(cbinary)
 
 
 
@@ -57,3 +57,4 @@ no-rm: $(binary)
 
 clean:
 	rm build/src/*.o
+	rm build/test/*.o
