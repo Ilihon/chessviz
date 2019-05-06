@@ -1,26 +1,25 @@
+.PHONY: all clean cleantest start test no-rm testlib
+
 g = g++
-pars = -c -std=c++11 -Wall -Werror
+pars = -c -Wall -Werror
 
 file1 = src/main.cpp
 file2 = src/board.cpp
 
+GTEST_DIR = thirdparty/googletest
 
 object1 = build/src/main.o
 object2 = build/src/board.o
 objects = $(object1) $(object2)
 
-object1_test = build/test/board.o
-object2_test = build/test/main.o
-object3_test = build/test/test.o
-objects_test = $(object2_test) $(object1_test) $(object3_test)
- 
-cbinary = bin/chessviz-test
 binary = bin/chessviz
 
 
-.PHONY: clean test all
 
 all: $(binary)
+
+$(binary): $(objects)
+	$(g) $^ -o $(binary)
 
 $(object1): $(file1)
 	$(g) $(pars) $^ -o $@
@@ -28,30 +27,26 @@ $(object1): $(file1)
 $(object2): $(file2)
 	$(g) $(pars) $^ -o $@
 
-$(binary): $(objects)
-	$(g) $^ -o $(binary)
+
+test: testlib bin/chessviz-test
 
 
-$(object1_test): src/board.cpp src/board.h
-	$(g) $(pars) src/board.cpp -o $@
+testlib:
+	g++ -std=c++11 -isystem ${GTEST_DIR}/include -I${GTEST_DIR} \
+    -pthread -c ${GTEST_DIR}/src/gtest-all.cc -o build/test/gtest-all.o
+	ar -rv build/test/libgtest.a build/test/gtest-all.o
 
-$(object2_test): test/main.cpp thirdparty/ctest.h
-	$(g) $(pars) -I thirdparty -I src  -c test/main.cpp -o $@
+bin/chessviz-test: build/test/test.o $(object2)
+	g++ -std=c++11 -isystem ${GTEST_DIR}/include -pthread $^ \
+	build/test/libgtest.a -o $@
 
-$(object2_test): test/test.cpp thirdparty/ctest.h src/board.h
-	$(g) $(pars) -I thirdparty -I src -c test/test.cpp -o $@
-
-$(cbinary): $(objects_test)
-	$(g) $(pars) $(objects_test) -o $(cbinary)
+build/test/test.o: test/test.cpp
+	$(g) -std=c++11  $(pars) $^ -I $(GTEST_DIR)/include -o $@
 
 
 
-test: 
+start: 
 	$(binary)
-
-ctest: $(cbinary)
-	$(cbinary)
-
 
 no-rm: $(binary)
 
