@@ -9,10 +9,10 @@ object1 = build/src/main.o
 object2 = build/src/board.o
 objects = $(object1) $(object2)
 
-object1_test = build/test/main.o
-object2_test = build/test/board.o
+object1_test = build/test/board.o
+object2_test = build/test/main.o
 object3_test = build/test/test.o
-objects_test = $(object1_test) $(object2_test) $(object3_test)
+objects_test = $(object2_test) $(object1_test) $(object3_test)
  
 cbinary = bin/chessviz-test
 binary = bin/chessviz
@@ -57,4 +57,5 @@ no-rm: $(binary)
 
 clean:
 	rm build/src/*.o
+cleantest:
 	rm build/test/*.o
