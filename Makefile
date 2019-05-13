@@ -29,7 +29,6 @@ $(object2): $(file2)
 
 
 test: testlib 
-	bin/chessviz-test
 
 
 testlib:
@@ -48,6 +47,9 @@ build/test/test.o: test/test.cpp
 
 start: 
 	$(binary)
+
+teststart:	
+	bin/chessviz-test
 
 no-rm: $(binary)
 
