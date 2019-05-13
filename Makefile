@@ -28,7 +28,8 @@ $(object2): $(file2)
 	$(g) $(pars) $^ -o $@
 
 
-test: testlib bin/chessviz-test
+test: testlib 
+	bin/chessviz-test
 
 
 testlib:
